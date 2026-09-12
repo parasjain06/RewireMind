@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This week, Monday to Sunday, each day marked the way the Calendar tab
+     marks it: filled when everything was done, tinted for some, a faint ring
+     for none, and a ring round today. -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/wm_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/wm_panel_day">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/wm_w0_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/wm_on_light_soft"
+                android:textSize="10sp"
+                android:text="Mon" />
+
+            <TextView
+                android:id="@+id/wm_w0"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginTop="2dp"
+                android:gravity="center"
+                android:fontFamily="sans-serif-medium"
+                android:textColor="@color/wm_on_light"
+                android:textSize="12.5sp"
+                android:text="7" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/wm_w1_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/wm_on_light_soft"
+                android:textSize="10sp"
+                android:text="Tue" />
+
+            <TextView
+                android:id="@+id/wm_w1"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginTop="2dp"
+                android:gravity="center"
+                android:fontFamily="sans-serif-medium"
+                android:textColor="@color/wm_on_light"
+                android:textSize="12.5sp"
+                android:text="8" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/wm_w2_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/wm_on_light_soft"
+                android:textSize="10sp"
+                android:text="Wed" />
+
+            <TextView
+                android:id="@+id/wm_w2"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginTop="2dp"
+                android:gravity="center"
+                android:fontFamily="sans-serif-medium"
+                android:textColor="@color/wm_on_light"
+                android:textSize="12.5sp"
+                android:text="9" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/wm_w3_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/wm_on_light_soft"
+                android:textSize="10sp"
+                android:text="Thu" />
+
+            <TextView
+                android:id="@+id/wm_w3"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginTop="2dp"
+                android:gravity="center"
+                android:fontFamily="sans-serif-medium"
+                android:textColor="@color/wm_on_light"
+                android:textSize="12.5sp"
+                android:text="10" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/wm_w4_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/wm_on_light_soft"
+                android:textSize="10sp"
+                android:text="Fri" />
+
+            <TextView
+                android:id="@+id/wm_w4"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginTop="2dp"
+                android:gravity="center"
+                android:fontFamily="sans-serif-medium"
+                android:textColor="@color/wm_on_light"
+                android:textSize="12.5sp"
+                android:text="11" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/wm_w5_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/wm_on_light_soft"
+                android:textSize="10sp"
+                android:text="Sat" />
+
+            <TextView
+                android:id="@+id/wm_w5"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginTop="2dp"
+                android:gravity="center"
+                android:fontFamily="sans-serif-medium"
+                android:textColor="@color/wm_on_light"
+                android:textSize="12.5sp"
+                android:text="12" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/wm_w6_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/wm_on_light_soft"
+                android:textSize="10sp"
+                android:text="Sun" />
+
+            <TextView
+                android:id="@+id/wm_w6"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginTop="2dp"
+                android:gravity="center"
+                android:fontFamily="sans-serif-medium"
+                android:textColor="@color/wm_on_light"
+                android:textSize="12.5sp"
+                android:text="13" />
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

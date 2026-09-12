@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Small: 2x2. The face and where you are up to, and nothing that would not fit.
+
+  Every id the provider writes to is present in all three layouts, hidden
+  where it has no room. One code path then drives every size, rather than
+  three that have to be kept in step.
+-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/wm_scene_mask"
+    android:clipToOutline="true">
+
+    <!-- The app's own sky, sun or moon, and tree — exported from the very
+         same painter the header uses, because a widget cannot run one. The
+         provider swaps it as the day goes on. -->
+    <ImageView
+        android:id="@+id/wm_scene"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/wm_scene_day"
+        android:importantForAccessibility="no" />
+
+    <!-- The reflection and the edge, over the scene. -->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/wm_glass"
+        android:importantForAccessibility="no" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="10dp">
+
+        <ViewFlipper
+            android:id="@+id/wm_mascot"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:autoStart="true"
+            android:flipInterval="300"
+            android:measureAllChildren="true">
+
+            <ImageView
+                android:id="@+id/wm_f1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:scaleType="fitEnd"
+                android:src="@drawable/wm_hero_1"
+                android:importantForAccessibility="no" />
+
+            <ImageView
+                android:id="@+id/wm_f2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:scaleType="fitEnd"
+                android:src="@drawable/wm_hero_2"
+                android:importantForAccessibility="no" />
+
+            <ImageView
+                android:id="@+id/wm_f3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:scaleType="fitEnd"
+                android:src="@drawable/wm_hero_3"
+                android:importantForAccessibility="no" />
+
+            <ImageView
+                android:id="@+id/wm_f4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:scaleType="fitEnd"
+                android:src="@drawable/wm_hero_4"
+                android:importantForAccessibility="no" />
+
+            <ImageView
+                android:id="@+id/wm_f5"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:scaleType="fitEnd"
+                android:src="@drawable/wm_hero_5"
+                android:importantForAccessibility="no" />
+
+            <ImageView
+                android:id="@+id/wm_f6"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:scaleType="fitEnd"
+                android:src="@drawable/wm_hero_6"
+                android:importantForAccessibility="no" />
+
+            <ImageView
+                android:id="@+id/wm_f7"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:scaleType="fitEnd"
+                android:src="@drawable/wm_hero_7"
+                android:importantForAccessibility="no" />
+
+            <ImageView
+                android:id="@+id/wm_f8"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:scaleType="fitEnd"
+                android:src="@drawable/wm_hero_8"
+                android:importantForAccessibility="no" />
+
+            <ImageView
+                android:id="@+id/wm_f9"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:scaleType="fitEnd"
+                android:src="@drawable/wm_hero_9"
+                android:importantForAccessibility="no" />
+
+            <ImageView
+                android:id="@+id/wm_f10"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:scaleType="fitEnd"
+                android:src="@drawable/wm_hero_10"
+                android:importantForAccessibility="no" />
+        </ViewFlipper>
+
+        <TextView
+            android:id="@+id/wm_streak"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/wm_pill"
+            android:paddingStart="9dp"
+            android:paddingEnd="9dp"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
+            android:maxLines="1"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:textColor="@color/wm_accent"
+            android:text="Day 0 of 21"
+            android:ellipsize="end"
+            android:autoSizeTextType="uniform"
+            android:autoSizeMinTextSize="9sp"
+            android:autoSizeMaxTextSize="11sp"
+            android:autoSizeStepGranularity="0.5sp" />
+
+        <!-- The short form, and only because the square is wide enough for two
+             words. The face is doing most of the talking at this size. -->
+        <TextView
+            android:id="@+id/wm_line"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:gravity="center"
+            android:maxLines="1"
+            android:textSize="11sp"
+            android:textColor="@color/wm_ink"
+            android:text="Ready?"
+            android:ellipsize="end"
+            android:autoSizeTextType="uniform"
+            android:autoSizeMinTextSize="9sp"
+            android:autoSizeMaxTextSize="11sp"
+            android:autoSizeStepGranularity="0.5sp" />
+
+        <TextView
+            android:id="@+id/wm_sub"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            android:text="" />
+
+        <ProgressBar
+            android:id="@+id/wm_progress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/wm_hint"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            android:text="" />
+    </LinearLayout>
+</FrameLayout>

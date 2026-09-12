@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This week, one row. -->
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:minWidth="250dp"
+    android:minHeight="56dp"
+    android:minResizeWidth="180dp"
+    android:minResizeHeight="56dp"
+    android:targetCellWidth="4"
+    android:targetCellHeight="1"
+    android:maxResizeWidth="800dp"
+    android:maxResizeHeight="130dp"
+    android:resizeMode="horizontal|vertical"
+    android:updatePeriodMillis="1800000"
+    android:initialLayout="@layout/rewiremind_widget_week"
+    android:previewLayout="@layout/rewiremind_widget_week"
+    android:description="@string/wm_description_week"
+    android:widgetCategory="home_screen" />

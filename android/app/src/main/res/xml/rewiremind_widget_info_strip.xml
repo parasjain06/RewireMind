@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  A full row, one cell tall.
+
+  Getting "full width" out of a widget is not a matter of asking for it: the
+  launcher places widgets on its own grid, and how many columns that grid has
+  is the launcher's business. A request for four cells is a whole row on a
+  four-column home screen and four fifths of one on a five-column home screen,
+  which is why this used to stop short.
+
+  So the width is demanded two ways, and the launcher has to satisfy both:
+
+    * minWidth 300dp is more than three columns' worth on a four-column grid
+      and more than four columns' worth on a five-column one, so on either the
+      only way to fit it is to give it the whole row. Not higher than that: the
+      phone this is built for is 360dp wide, the launcher keeps some of that
+      for itself, and a widget whose minimum exceeds the grid is a widget that
+      cannot be placed at all;
+    * targetCellWidth 5 asks for five columns outright on Android 12 and later,
+      and clamps down to the grid on a narrower one.
+
+  minResizeWidth stays low so it can still be dragged narrower on purpose, and
+  maxResize is generous so it can be dragged wide on a tablet. What no widget
+  can do is close the gutter the launcher leaves around it — that margin
+  belongs to the home screen, not to us.
+-->
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:minWidth="300dp"
+    android:minHeight="56dp"
+    android:minResizeWidth="180dp"
+    android:minResizeHeight="56dp"
+    android:targetCellWidth="5"
+    android:targetCellHeight="1"
+    android:maxResizeWidth="800dp"
+    android:maxResizeHeight="110dp"
+    android:resizeMode="horizontal"
+    android:updatePeriodMillis="1800000"
+    android:initialLayout="@layout/rewiremind_widget_strip"
+    android:previewLayout="@layout/rewiremind_widget_strip"
+    android:previewImage="@drawable/wm_pv_strip"
+    android:description="@string/wm_description_strip"
+    android:widgetCategory="home_screen" />

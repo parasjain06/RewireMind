@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Strip: one cell tall, a full row across.
+
+  Three things on one line: what the character has to say on the left, the
+  character itself in the middle, and where you are up to on the right.
+
+  The mascot is centred by the two weights on either side of it rather than by
+  being lifted out of the row and floated over a spacer. That is how it was —
+  and the spacer was a plain <View>, which RemoteViews will not inflate, so the
+  launcher refused the entire widget. Everything in here is now a class a
+  widget is allowed to have.
+-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/wm_scene_mask"
+    android:clipToOutline="true">
+
+    <!-- The app's own sky, sun or moon, and tree — exported from the very
+         same painter the header uses, because a widget cannot run one. The
+         provider swaps it as the day goes on. -->
+    <ImageView
+        android:id="@+id/wm_scene"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/wm_scene_day"
+        android:importantForAccessibility="no" />
+
+    <!-- The reflection and the edge, over the scene. -->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/wm_glass"
+        android:importantForAccessibility="no" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingStart="14dp"
+        android:paddingEnd="14dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp">
+
+        <TextView
+            android:id="@+id/wm_line"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:gravity="center"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@color/wm_ink"
+            android:text="Got a minute?"
+            android:autoSizeTextType="uniform"
+            android:autoSizeMinTextSize="11sp"
+            android:autoSizeMaxTextSize="14sp"
+            android:autoSizeStepGranularity="0.5sp" />
+
+        <ViewFlipper
+            android:id="@+id/wm_mascot"
+            android:layout_width="62dp"
+            android:layout_height="match_parent"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
+            android:autoStart="true"
+            android:flipInterval="300"
+            android:measureAllChildren="true">
+
+            <ImageView
+                android:id="@+id/wm_f1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:scaleType="fitEnd"
+                android:src="@drawable/wm_hero_1"
+                android:importantForAccessibility="no" />
+
+            <ImageView
+                android:id="@+id/wm_f2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:scaleType="fitEnd"
+                android:src="@drawable/wm_hero_2"
+                android:importantForAccessibility="no" />
+
+            <ImageView
+                android:id="@+id/wm_f3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:scaleType="fitEnd"
+                android:src="@drawable/wm_hero_3"
+                android:importantForAccessibility="no" />
+
+            <ImageView
+                android:id="@+id/wm_f4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:scaleType="fitEnd"
+                android:src="@drawable/wm_hero_4"
+                android:importantForAccessibility="no" />
+
+            <ImageView
+                android:id="@+id/wm_f5"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:scaleType="fitEnd"
+                android:src="@drawable/wm_hero_5"
+                android:importantForAccessibility="no" />
+
+            <ImageView
+                android:id="@+id/wm_f6"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:scaleType="fitEnd"
+                android:src="@drawable/wm_hero_6"
+                android:importantForAccessibility="no" />
+
+            <ImageView
+                android:id="@+id/wm_f7"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:scaleType="fitEnd"
+                android:src="@drawable/wm_hero_7"
+                android:importantForAccessibility="no" />
+
+            <ImageView
+                android:id="@+id/wm_f8"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:scaleType="fitEnd"
+                android:src="@drawable/wm_hero_8"
+                android:importantForAccessibility="no" />
+
+            <ImageView
+                android:id="@+id/wm_f9"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:scaleType="fitEnd"
+                android:src="@drawable/wm_hero_9"
+                android:importantForAccessibility="no" />
+
+            <ImageView
+                android:id="@+id/wm_f10"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:scaleType="fitEnd"
+                android:src="@drawable/wm_hero_10"
+                android:importantForAccessibility="no" />
+        </ViewFlipper>
+
+        <!-- The chip rides in its own weighted box so that the mascot sits on
+             the centre line of the widget whatever the chip happens to say.
+             Right-aligned inside it, so it still hugs the edge. -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:orientation="horizontal"
+            android:gravity="end|center_vertical">
+
+            <TextView
+                android:id="@+id/wm_streak"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/wm_pill"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:maxLines="1"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:textColor="@color/wm_accent"
+                android:text="Day 9 of 21"
+                android:ellipsize="end"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMinTextSize="9sp"
+                android:autoSizeMaxTextSize="11sp"
+                android:autoSizeStepGranularity="0.5sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/wm_sub"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            android:text="" />
+
+        <ProgressBar
+            android:id="@+id/wm_progress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/wm_hint"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            android:text="" />
+    </LinearLayout>
+</FrameLayout>

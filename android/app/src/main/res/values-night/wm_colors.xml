@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Launchers honour the system theme, and a bright pane on a dark home
+     screen is a torch. Same construction, darker glass. -->
+<resources>
+    <color name="wm_grad_a">#FF1E2A40</color>
+    <color name="wm_grad_b">#FF1A2335</color>
+    <color name="wm_grad_c">#FF141D2B</color>
+
+    <color name="wm_rim">#33FFFFFF</color>
+    <color name="wm_sheen">#1FFFFFFF</color>
+
+    <color name="wm_accent">#FF8AD9AC</color>
+    <color name="wm_accent_soft">#1FFFFFFF</color>
+    <color name="wm_ink">#FFF1F6F3</color>
+    <color name="wm_ink_soft">#FFA3B2C0</color>
+</resources>

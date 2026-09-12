@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Square. The face and where you are up to.
+
+  Getting a square out of a launcher takes saying it twice, because neither way
+  of asking works alone.
+
+  Asking in cells ("2 by 2") is not asking for a square: cells are whatever
+  shape the grid makes them, and on a tall phone a row is nearly twice as tall
+  as a column is wide, so two by two came out half again as tall as it was
+  wide. Asking in dp is not enough either — dropping the cell counts and
+  leaving minHeight at 110dp still landed on two rows, because one row of this
+  launcher's grid is shorter than that and 110 does not fit in it.
+
+  So: 110dp wide against a height low enough to fit one row, and
+  targetCellHeight 1 to say the same thing again in the units Android 12 and
+  later prefer. A launcher that honours neither still gets a widget it can
+  place; it is only the shape that is a request.
+-->
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:minWidth="110dp"
+    android:minHeight="80dp"
+    android:minResizeWidth="110dp"
+    android:minResizeHeight="70dp"
+    android:targetCellWidth="2"
+    android:targetCellHeight="1"
+    android:maxResizeWidth="200dp"
+    android:maxResizeHeight="200dp"
+    android:resizeMode="horizontal|vertical"
+    android:updatePeriodMillis="1800000"
+    android:initialLayout="@layout/rewiremind_widget_small"
+    android:previewLayout="@layout/rewiremind_widget_small"
+    android:previewImage="@drawable/wm_pv_small"
+    android:description="@string/wm_description_small"
+    android:widgetCategory="home_screen" />

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Today, finished: the filled day inside a ring, so it still reads as today. -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="#00000000" />
+            <stroke android:width="1.5dp" android:color="#FF52A08A" />
+        </shape>
+    </item>
+    <item android:top="3dp" android:bottom="3dp" android:left="3dp" android:right="3dp">
+        <shape android:shape="oval">
+            <solid android:color="#FF52A08A" />
+        </shape>
+    </item>
+</layer-list>

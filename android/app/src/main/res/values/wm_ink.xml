@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Text colours for the widget, in pairs.
+
+  Not in values/ and values-night/ any more. Those follow the *system* theme,
+  and the widget's backdrop follows the *app's* time of day — so a phone set
+  to light mode showing the night scene got dark text on a navy sky. The
+  provider picks the pair that matches the scene it just set.
+-->
+<resources>
+    <color name="wm_on_light">#FF16261D</color>
+    <color name="wm_on_light_soft">#FF5E7168</color>
+    <color name="wm_on_light_accent">#FF1D5E38</color>
+    <color name="wm_on_light_faint">#FF9DADA5</color>
+
+    <color name="wm_on_dark">#FFF1F6F3</color>
+    <color name="wm_on_dark_soft">#FFC3D0D9</color>
+    <color name="wm_on_dark_accent">#FFB6ECCB</color>
+    <color name="wm_on_dark_faint">#FF72859B</color>
+</resources>

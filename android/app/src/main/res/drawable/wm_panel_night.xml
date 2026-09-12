@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The checklist and calendar widgets' surface for the night. Explicit colours
+     rather than values-night: the widget follows the app's time of day, not
+     the phone's dark mode, the same as the mascot's sky does. -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="24dp" />
+            <gradient
+                android:angle="135"
+                android:type="linear"
+                android:startColor="#FF22324B"
+                android:centerColor="#FF1B2940"
+                android:endColor="#FF152034" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="24dp" />
+            <gradient
+                android:type="radial"
+                android:centerX="0.1"
+                android:centerY="0.0"
+                android:gradientRadius="220dp"
+                android:startColor="#1FFFFFFF"
+                android:endColor="#00FFFFFF" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="24dp" />
+            <solid android:color="#00000000" />
+            <stroke android:width="1.2dp" android:color="#38FFFFFF" />
+        </shape>
+    </item>
+</layer-list>

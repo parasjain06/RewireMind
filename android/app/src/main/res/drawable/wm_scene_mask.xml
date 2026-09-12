@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Nothing but an outline. The root frame carries this as its background and
+     sets `clipToOutline`, which is what rounds off the scene photograph
+     behind the content — an ImageView on its own cannot be given corners. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="#00000000" />
+    <corners android:radius="26dp" />
+</shape>

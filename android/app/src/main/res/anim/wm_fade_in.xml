@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Slow enough to read as movement rather than a cut. The frames are close
+     together, so a crossfade between them looks like the character shifting
+     its weight instead of two pictures swapping. -->
+<alpha xmlns:android="http://schemas.android.com/apk/res/android"
+    android:duration="450"
+    android:fromAlpha="0.0"
+    android:toAlpha="1.0" />

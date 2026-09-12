@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  What the widget is called, and what it says it does.
+
+  The label is read twice: once in the launcher's widget drawer next to
+  everybody else's, and once in the "Add to Home screen" dialog, where it is
+  the only line of ours on the card. "RewireMind - square" described the
+  rectangle rather than the thing, which is a strange way to introduce a
+  character. These say what you are getting.
+
+  The description is the line under it in the drawer. Kept to one breath: the
+  drawer gives it two lines and cuts the rest off mid-word.
+-->
+<resources>
+    <string name="wm_label_strip">RewireMind &#183; one line</string>
+    <string name="wm_label_small">RewireMind &#183; the face</string>
+    <string name="wm_label">RewireMind &#183; the day</string>
+    <string name="wm_label_list">RewireMind &#183; today\'s list</string>
+    <string name="wm_label_week">RewireMind &#183; this week</string>
+    <string name="wm_label_month">RewireMind &#183; this month</string>
+
+    <string name="wm_description_strip">A brain, a word from it, and what is left of today.</string>
+    <string name="wm_description_small">The brain you are rewiring, doing whatever you are doing.</string>
+    <string name="wm_description">Today at a glance, and a brain with something to say about it.</string>
+
+    <string name="wm_description_list">Today\'s habits, ticked off as you go.</string>
+    <string name="wm_description_week">Your week, day by day.</string>
+    <string name="wm_description_month">The whole month at a glance.</string>
+</resources>

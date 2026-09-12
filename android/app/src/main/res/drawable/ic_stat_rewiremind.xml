@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  The status bar icon: the mascot's silhouette, and nothing else.
+
+  A vector rather than the five PNGs that were here before. Those never made it
+  into the built APK — Gradle staged them and aapt2 dropped them without a word,
+  and the plugin's answer to a name it cannot resolve is to throw, which took
+  the entire notification module down with it. XML drawables in this folder are
+  demonstrably built (wm_card, wm_glass, launch_background all resolve), so the
+  icon is now one of those.
+
+  No face on it. Android tints a status icon flat white by its alpha, so every
+  interior line would have to be a hole punched through the shape, and at 24dp
+  those holes close up anyway. A solid silhouette is what this size is for.
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108"
+    android:tint="#FFFFFFFF">
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M54,26c6,0 11,3 13,7c5,-3 12,-1 14,4c6,1 9,7 7,12c4,4 4,11 0,14c1,7 -5,13 -12,12c-4,4 -12,5 -17,2c-3,2 -7,2 -10,0c-5,3 -13,2 -17,-2c-7,1 -13,-5 -12,-12c-4,-3 -4,-10 0,-14c-2,-5 1,-11 7,-12c2,-5 9,-7 14,-4c2,-4 7,-7 13,-7z" />
+</vector>

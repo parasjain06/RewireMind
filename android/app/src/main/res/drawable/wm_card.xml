@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  The widget's surface, built as glass rather than as a filled rectangle.
+
+  Three layers, and each one is doing a job a single shape cannot:
+
+    1. a diagonal gradient, so the card has a direction and a light source;
+    2. a radial sheen from the top left, which is the reflection — this is the
+       layer that makes it read as a pane rather than a painted panel;
+    3. a hairline white rim, which is what an edge of glass actually looks
+       like against whatever is behind it.
+
+  Drawn in XML because a home screen widget is RemoteViews: there is no canvas
+  to paint on and no shader to hand it, so the shape system is the only tool.
+-->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="26dp" />
+            <gradient
+                android:angle="135"
+                android:type="linear"
+                android:startColor="@color/wm_grad_a"
+                android:centerColor="@color/wm_grad_b"
+                android:endColor="@color/wm_grad_c" />
+        </shape>
+    </item>
+
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="26dp" />
+            <gradient
+                android:type="radial"
+                android:centerX="0.12"
+                android:centerY="0.0"
+                android:gradientRadius="200dp"
+                android:startColor="@color/wm_sheen"
+                android:endColor="#00FFFFFF" />
+        </shape>
+    </item>
+
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="26dp" />
+            <solid android:color="#00000000" />
+            <stroke
+                android:width="1.5dp"
+                android:color="@color/wm_rim" />
+        </shape>
+    </item>
+</layer-list>

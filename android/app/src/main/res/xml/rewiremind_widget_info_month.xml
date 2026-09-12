@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This month. Starts compact; stretched, it switches to the roomy layout. -->
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:minWidth="170dp"
+    android:minHeight="150dp"
+    android:minResizeWidth="150dp"
+    android:minResizeHeight="150dp"
+    android:targetCellWidth="3"
+    android:targetCellHeight="2"
+    android:maxResizeWidth="600dp"
+    android:maxResizeHeight="520dp"
+    android:resizeMode="horizontal|vertical"
+    android:updatePeriodMillis="1800000"
+    android:initialLayout="@layout/rewiremind_widget_month_small"
+    android:previewLayout="@layout/rewiremind_widget_month_small"
+    android:description="@string/wm_description_month"
+    android:widgetCategory="home_screen" />

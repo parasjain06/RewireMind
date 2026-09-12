@@ -1,0 +1,160 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Android 13+ prompts for this at runtime; the app asks only when the
+         user turns reminders on, never at launch. -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <!-- Pending reminders are dropped by the system on reboot, so they have to
+         be rebuilt once the device comes back up. -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+
+    <application
+        android:label="${appLabel}"
+        android:name="${applicationName}"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round">
+        <!-- Names the status-bar icon from the manifest.
+             Not decoration: a drawable referenced only from a Dart string is
+             invisible to the resource pipeline, and this one was being dropped
+             from the built APK — the plugin then threw on every call and took
+             the whole notification module with it. A manifest reference is
+             both the fix and the proof: the build fails outright if the
+             resource is missing, instead of failing silently at runtime. -->
+        <meta-data
+            android:name="com.parasjain.rewiremind.notification_icon"
+            android:resource="@drawable/ic_stat_rewiremind" />
+
+        <!-- And the tone, for the same reason: named only in Dart it would be
+             invisible to the resource pipeline. -->
+        <meta-data
+            android:name="com.parasjain.rewiremind.notification_sound"
+            android:resource="@raw/rewire_reward3" />
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:taskAffinity=""
+            android:theme="@style/LaunchTheme"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+            android:hardwareAccelerated="true"
+            android:windowSoftInputMode="adjustResize">
+            <!-- Specifies an Android theme to apply to this Activity as soon as
+                 the Android process has started. This theme is visible to the user
+                 while the Flutter UI initializes. After that, this theme continues
+                 to determine the Window background behind the Flutter UI. -->
+            <meta-data
+              android:name="io.flutter.embedding.android.NormalTheme"
+              android:resource="@style/NormalTheme"
+              />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <!-- The home screen widget: the mascot in three sizes, then the
+             checklist, the week and the month. One receiver each,
+             because that is how Android's widget picker offers a choice: the
+             list it shows is the list of providers. Their content is written
+             from Dart and read back here; nothing about it is decided in
+             Kotlin. -->
+        <receiver
+            android:name=".RewireMindSmallWidgetProvider"
+            android:exported="true"
+            android:label="@string/wm_label_small">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/rewiremind_widget_info_small"/>
+        </receiver>
+        <receiver
+            android:name=".RewireMindWidgetProvider"
+            android:exported="true"
+            android:label="@string/wm_label">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/rewiremind_widget_info"/>
+        </receiver>
+        <receiver
+            android:name=".RewireMindStripWidgetProvider"
+            android:exported="true"
+            android:label="@string/wm_label_strip">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/rewiremind_widget_info_strip"/>
+        </receiver>
+        <receiver
+            android:name=".RewireMindListWidgetProvider"
+            android:exported="true"
+            android:label="@string/wm_label_list">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/rewiremind_widget_info_list" />
+        </receiver>
+        <receiver
+            android:name=".RewireMindWeekWidgetProvider"
+            android:exported="true"
+            android:label="@string/wm_label_week">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/rewiremind_widget_info_week" />
+        </receiver>
+        <receiver
+            android:name=".RewireMindMonthWidgetProvider"
+            android:exported="true"
+            android:label="@string/wm_label_month">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/rewiremind_widget_info_month" />
+        </receiver>
+
+        <!-- Restores scheduled reminders after a reboot. Without these the
+             app stays silent until it is next opened by hand. -->
+        <receiver
+            android:exported="false"
+            android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationReceiver"/>
+        <receiver
+            android:exported="false"
+            android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
+                <action android:name="android.intent.action.QUICKBOOT_POWERON"/>
+                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON"/>
+            </intent-filter>
+        </receiver>
+
+        <!-- Don't delete the meta-data below.
+             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
+        <meta-data
+            android:name="flutterEmbedding"
+            android:value="2" />
+    </application>
+    <!-- Required to query activities that can process text, see:
+         https://developer.android.com/training/package-visibility and
+         https://developer.android.com/reference/android/content/Intent#ACTION_PROCESS_TEXT.
+
+         In particular, this is used by the Flutter engine in io.flutter.plugin.text.ProcessTextPlugin. -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.PROCESS_TEXT"/>
+            <data android:mimeType="text/plain"/>
+        </intent>
+    </queries>
+</manifest>

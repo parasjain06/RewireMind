@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  The glass, with no ground of its own.
+
+  The card used to be a gradient, a sheen and a rim. The gradient's job has
+  been taken over by a picture of the app's own sky, so what is left is the
+  part that made it read as a pane rather than a panel: the reflection across
+  the top left, and the hairline edge.
+-->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="26dp" />
+            <gradient
+                android:type="radial"
+                android:centerX="0.12"
+                android:centerY="0.0"
+                android:gradientRadius="200dp"
+                android:startColor="#4DFFFFFF"
+                android:endColor="#00FFFFFF" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="26dp" />
+            <solid android:color="#00000000" />
+            <stroke
+                android:width="1.5dp"
+                android:color="#8CFFFFFF" />
+        </shape>
+    </item>
+</layer-list>

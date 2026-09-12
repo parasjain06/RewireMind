@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The widget cannot read the app's Dart theme, so the handful of colours it
+     needs are declared here. Taken from the forest palette's day tones, which
+     is what the app opens on.
+
+     The three gradient stops shift hue as well as lightness — mint through to
+     a cool sky — because a single-colour card on a wallpaper reads as a hole
+     punched in it, where a gradient reads as a pane of something. -->
+<resources>
+    <color name="wm_grad_a">#FFF6FCF8</color>
+    <color name="wm_grad_b">#FFE7F3EE</color>
+    <color name="wm_grad_c">#FFDCEAF4</color>
+
+    <!-- The rim, and the sheen across the top left. Both are white over the
+         gradient rather than a colour of their own: that is what makes an edge
+         look like glass instead of a border. -->
+    <color name="wm_rim">#8CFFFFFF</color>
+    <color name="wm_sheen">#59FFFFFF</color>
+
+    <color name="wm_accent">#FF2E7D4F</color>
+    <color name="wm_accent_soft">#66FFFFFF</color>
+    <color name="wm_ink">#FF16261D</color>
+    <color name="wm_ink_soft">#FF5E7168</color>
+</resources>

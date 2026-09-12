@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108 108" width="108" height="108">
+  <!-- ==================================================================
+       RewireMind — icon background (Android adaptive icon layer)
+
+       Full bleed and deliberately quiet: the launcher masks this layer and
+       parallaxes it against the foreground, so detail in here wobbles. The
+       app's forest green, with the same warm bloom in the top right that
+       the daytime scene has.
+       ================================================================== -->
+  <defs>
+    <linearGradient id="ground" gradientUnits="userSpaceOnUse"
+                    x1="0" y1="0" x2="108" y2="108">
+      <stop offset="0" stop-color="#22A660"/>
+      <stop offset="1" stop-color="#0E6338"/>
+    </linearGradient>
+    <radialGradient id="bloom" gradientUnits="userSpaceOnUse"
+                    cx="88" cy="14" r="76">
+      <stop offset="0" stop-color="#FFF3B0" stop-opacity="0.30"/>
+      <stop offset="0.55" stop-color="#FFF3B0" stop-opacity="0.09"/>
+      <stop offset="1" stop-color="#FFF3B0" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="108" height="108" fill="url(#ground)"/>
+  <rect width="108" height="108" fill="url(#bloom)"/>
+</svg>
