@@ -235,13 +235,12 @@ class NotificationService {
     if (!notificationsAvailable) return false;
     await init();
 
-    if (await hasPermission()) return true;
-
     final android = _plugin
         .resolvePlatformSpecificImplementation<
           AndroidFlutterLocalNotificationsPlugin
         >();
     if (android != null) {
+      if (await android.areNotificationsEnabled() == true) return true;
       final asked = await android.requestNotificationsPermission();
       return asked ?? await hasPermission();
     }
@@ -251,12 +250,12 @@ class NotificationService {
           IOSFlutterLocalNotificationsPlugin
         >();
     if (ios != null) {
-      return await ios.requestPermissions(
-            alert: true,
-            badge: true,
-            sound: true,
-          ) ??
-          false;
+      final asked = await ios.requestPermissions(
+        alert: true,
+        badge: true,
+        sound: true,
+      );
+      return asked ?? await hasPermission();
     }
     return false;
   }
@@ -270,6 +269,14 @@ class NotificationService {
         >();
     if (android != null) {
       return await android.areNotificationsEnabled() ?? false;
+    }
+    final ios = _plugin
+        .resolvePlatformSpecificImplementation<
+          IOSFlutterLocalNotificationsPlugin
+        >();
+    if (ios != null) {
+      final permissions = await ios.checkPermissions();
+      return permissions?.isEnabled ?? false;
     }
     return true;
   }
@@ -381,7 +388,13 @@ class NotificationService {
               ]
             : null,
       ),
-      iOS: DarwinNotificationDetails(subtitle: send.label),
+      iOS: DarwinNotificationDetails(
+        subtitle: send.label,
+        presentAlert: true,
+        presentBadge: true,
+        presentSound: true,
+        sound: 'default',
+      ),
     );
   }
 
