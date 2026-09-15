@@ -10,7 +10,6 @@ import '../widgets/app_background.dart';
 import '../widgets/app_snackbar.dart';
 import '../widgets/k_card.dart';
 import 'habit_editor_sheet.dart';
-import 'reminder_editor_sheet.dart';
 import '../content/premium_content.dart';
 import '../models/premium.dart';
 import 'premium_screen.dart';
@@ -82,30 +81,6 @@ class _HabitLibraryScreenState extends State<HabitLibraryScreen> {
     await showAppSnackBar(context, message: HabitLibrary.removed(preset.name));
   }
 
-  Future<void> _quickAdd(HabitPreset preset) async {
-    final state = context.read<AppState>();
-    if (!await _roomForOneMore()) return;
-
-    final habit = await state.addHabit(
-      name: preset.name,
-      iconKey: preset.iconKey,
-      target: preset.target,
-      unit: preset.unit,
-      kind: preset.kind,
-      startOn: widget.startOn,
-    );
-
-    if (!mounted) return;
-    await showAppSnackBar(
-      context,
-      message: '${preset.name} ${HabitLibrary.addedToast}',
-      duration: const Duration(milliseconds: 1600),
-    );
-
-    // Asked now, while the user is still thinking about when they will do it.
-    if (!mounted) return;
-    await offerReminderFor(context, habit);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -163,20 +138,22 @@ class _HabitLibraryScreenState extends State<HabitLibraryScreen> {
                 itemBuilder: (context, i) {
                   final preset = presets[i];
                   final added = _isAdded(state, preset);
+                  Future<void> openEditor() async {
+                    if (!await _roomForOneMore()) return;
+                    if (!context.mounted) return;
+                    await HabitEditorSheet.show(
+                      context,
+                      preset: preset,
+                      startOn: widget.startOn,
+                    );
+                  }
+
                   return _PresetRow(
                     preset: preset,
                     added: added,
-                    onAdd: added ? null : () => _quickAdd(preset),
+                    onAdd: added ? null : openEditor,
                     onRemove: added ? () => _remove(preset) : null,
-                    onCustomise: () async {
-                      if (!await _roomForOneMore()) return;
-                      if (!context.mounted) return;
-                      await HabitEditorSheet.show(
-                        context,
-                        preset: preset,
-                        startOn: widget.startOn,
-                      );
-                    },
+                    onCustomise: openEditor,
                   );
                 },
               ),

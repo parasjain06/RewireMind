@@ -111,7 +111,13 @@ void main() {
     // card at the top is showing.
     final state = await withPartDay();
     final part = state.today.subtract(const Duration(days: 21));
-    final other = part.add(const Duration(days: 1));
+    // A neighbour inside the same week: the grid draws one week at a time, so
+    // when the day it opened on is a Sunday the neighbour has to be the day
+    // before it. (It was always "the day after" until a Sunday came round and
+    // the day after was on a row that is not on screen.)
+    final other = part.weekday == DateTime.sunday
+        ? part.subtract(const Duration(days: 1))
+        : part.add(const Duration(days: 1));
 
     await pumpDetail(tester, state, day: part);
     await tester.tap(find.byTooltip(_tooltipFor(other)));

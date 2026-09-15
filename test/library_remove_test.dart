@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import 'package:rewiremind/content/app_content.dart';
 import 'package:rewiremind/content/habit_library.dart';
 
 import 'helpers.dart';
@@ -18,6 +19,9 @@ void main() {
     await tester.tap(
       find.descendant(of: row.first, matching: find.byIcon(Icons.add)),
     );
+    await tester.pumpAndSettle();
+    // The + button now opens the editor; save the habit.
+    await tester.tap(find.text(AppContent.editorCreate));
     await tester.pumpAndSettle();
     if (find.text('Not now').evaluate().isNotEmpty) {
       await tester.tap(find.text('Not now'));

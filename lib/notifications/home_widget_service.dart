@@ -54,10 +54,13 @@ class HomeWidgetService {
   /// Turned off under `flutter test`, where there is no platform to write to.
   static bool available = true;
 
-  /// Whether this platform has a home screen widget to offer.
-  static bool get supported =>
-      defaultTargetPlatform == TargetPlatform.android ||
-      defaultTargetPlatform == TargetPlatform.iOS;
+  /// Whether this platform has a home screen widget to offer at all.
+  ///
+  /// Android only. The widget is Android RemoteViews drawn from Kotlin; an
+  /// iPhone widget would be a separate WidgetKit extension written in Swift,
+  /// and until one exists the screens that offer a widget are hidden there
+  /// rather than promising something that cannot be added.
+  static bool get supported => defaultTargetPlatform == TargetPlatform.android;
 
   /// Works out what the widget should say and puts it there.
   Future<void> push({
@@ -141,7 +144,6 @@ class HomeWidgetService {
         await HomeWidget.updateWidget(
           name: kind.provider,
           androidName: kind.provider,
-          iOSName: 'RewireMindWidget',
         );
       }
     } catch (_) {
@@ -156,9 +158,6 @@ class HomeWidgetService {
   /// means "ask them to do it by hand", not "something went wrong".
   static Future<bool> requestPin(WidgetKind kind) async {
     if (!available) return false;
-    if (defaultTargetPlatform == TargetPlatform.iOS) {
-      return false;
-    }
     try {
       final pinned = await _channel.invokeMethod<bool>('pin', {
         'provider': kind.provider,

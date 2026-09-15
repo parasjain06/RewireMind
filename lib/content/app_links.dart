@@ -15,8 +15,8 @@ class AppLinks {
   const AppLinks._();
 
   static const String website = 'https://rewiremind.app';
-  static const String x = 'https://x.com/rewiredapp';
-  static const String linkedIn = 'https://www.linkedin.com/company/rewiredapp';
+  static const String x = 'https://x.com/rewiremindapp';
+  static const String linkedIn = 'https://www.linkedin.com/company/rewiremindapp';
   static const String terms = 'https://rewiremind.app/terms';
   static const String privacy = 'https://rewiremind.app/privacy';
 

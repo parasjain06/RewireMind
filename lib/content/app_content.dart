@@ -1063,6 +1063,12 @@ class AppContent {
       subtitle: 'RewireMind, and the small print',
       iconKey: 'about',
     ),
+    ProfileMenuEntry(
+      id: 'sign_out',
+      title: 'Sign out',
+      subtitle: 'Your data stays on this phone',
+      iconKey: 'sign_out',
+    ),
     // Only in builds made with DEV_TOOLS; see kTestAppRow.
     ProfileMenuEntry(
       id: 'test_app',

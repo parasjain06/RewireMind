@@ -110,6 +110,17 @@ class NotificationService {
   static const String _sound = 'rewire_reward3';
   static const String _markDoneActionId = 'mark_done';
 
+  /// iOS only shows a notification's action buttons when their category was
+  /// registered up front — there is no per-notification custom title the way
+  /// Android's [AndroidNotificationAction] has one. So this covers the one
+  /// case a single fixed title is honest for: a habit that is a daily tick,
+  /// where "Mark done" is exactly right whichever habit it is. A measured
+  /// habit's own step — "+1 glass", "+15 min" — has no fixed wording that
+  /// would be true for all of them, so on iOS those reminders open straight
+  /// to the habit instead of offering a button that might say the wrong
+  /// amount.
+  static const String _markDoneCategoryId = 'mark_done_category';
+
   /// Android accent colour per phase, so the shade matches the app that the
   /// tap will open. These mirror the phase palettes in `app_theme.dart`.
   static const Map<DayPhase, Color> _accents = {
@@ -153,13 +164,24 @@ class NotificationService {
         await _plugin.initialize(
           settings: InitializationSettings(
             android: AndroidInitializationSettings(icon),
-            iOS: const DarwinInitializationSettings(
+            iOS: DarwinInitializationSettings(
               requestAlertPermission: false,
               requestBadgePermission: false,
               requestSoundPermission: false,
-              defaultPresentAlert: true,
-              defaultPresentSound: true,
-              defaultPresentBadge: true,
+              notificationCategories: [
+                DarwinNotificationCategory(
+                  _markDoneCategoryId,
+                  actions: [
+                    DarwinNotificationAction.plain(
+                      _markDoneActionId,
+                      NotificationContent.actionMarkDone,
+                      options: {
+                        DarwinNotificationActionOption.foreground,
+                      },
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
           onDidReceiveNotificationResponse: _onResponse,
@@ -238,12 +260,13 @@ class NotificationService {
     if (!notificationsAvailable) return false;
     await init();
 
+    if (await hasPermission()) return true;
+
     final android = _plugin
         .resolvePlatformSpecificImplementation<
           AndroidFlutterLocalNotificationsPlugin
         >();
     if (android != null) {
-      if (await android.areNotificationsEnabled() == true) return true;
       final asked = await android.requestNotificationsPermission();
       return asked ?? await hasPermission();
     }
@@ -253,12 +276,12 @@ class NotificationService {
           IOSFlutterLocalNotificationsPlugin
         >();
     if (ios != null) {
-      final asked = await ios.requestPermissions(
-        alert: true,
-        badge: true,
-        sound: true,
-      );
-      return asked ?? await hasPermission();
+      return await ios.requestPermissions(
+            alert: true,
+            badge: true,
+            sound: true,
+          ) ??
+          false;
     }
     return false;
   }
@@ -273,13 +296,21 @@ class NotificationService {
     if (android != null) {
       return await android.areNotificationsEnabled() ?? false;
     }
+
+    // This used to return true unconditionally here, which is the whole
+    // reason notifications never worked on iPhone: [requestPermission] checks
+    // this first and skips asking whenever it already reports "yes", so the
+    // OS prompt never appeared and iOS notifications stayed unauthorised —
+    // silently, because failing to schedule an unauthorised notification
+    // raises nothing. iOS starts every app at "not determined", not granted,
+    // so it has to be asked for real.
     final ios = _plugin
         .resolvePlatformSpecificImplementation<
           IOSFlutterLocalNotificationsPlugin
         >();
     if (ios != null) {
-      final permissions = await ios.checkPermissions();
-      return permissions?.isEnabled ?? false;
+      final state = await ios.checkPermissions();
+      return state?.isEnabled ?? false;
     }
     return true;
   }
@@ -393,10 +424,11 @@ class NotificationService {
       ),
       iOS: DarwinNotificationDetails(
         subtitle: send.label,
-        presentAlert: true,
-        presentBadge: true,
-        presentSound: true,
-        sound: 'default',
+        sound: '$_sound.caf',
+        categoryIdentifier: send.canMarkDone &&
+                send.quickLabel == NotificationContent.actionMarkDone
+            ? _markDoneCategoryId
+            : null,
       ),
     );
   }

@@ -462,6 +462,10 @@ class _MenuRow extends StatelessWidget {
             AboutScreen.open(context);
             return;
           }
+          if (entry.id == 'sign_out') {
+            _signOut(context);
+            return;
+          }
           showAppSnackBar(
             context,
             message: '${entry.title} — coming soon',
@@ -512,6 +516,33 @@ class _MenuRow extends StatelessWidget {
 
 /// A mail draft to the feedback address, with the build already in it, so a
 /// note arrives with the version it came from.
+Future<void> _signOut(BuildContext context) async {
+  final k = context.k;
+  final confirmed = await showDialog<bool>(
+    context: context,
+    builder: (ctx) => AlertDialog(
+      backgroundColor: k.colors.surface,
+      title: Text(AppContent.signOutTitle, style: k.text.sectionTitle),
+      content: Text(AppContent.signOutBody, style: k.text.body),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(ctx, false),
+          child: Text(AppContent.editorCancel),
+        ),
+        TextButton(
+          onPressed: () => Navigator.pop(ctx, true),
+          child: Text(
+            AppContent.signOutConfirm,
+            style: TextStyle(color: k.colors.danger),
+          ),
+        ),
+      ],
+    ),
+  );
+  if (confirmed != true || !context.mounted) return;
+  await context.read<AppState>().signOut();
+}
+
 Future<void> _sendFeedback(BuildContext context) async {
   final info = await PackageInfo.fromPlatform();
   if (!context.mounted) return;

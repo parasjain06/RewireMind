@@ -73,6 +73,10 @@ void main() {
     );
     await tester.pumpAndSettle();
 
+    // The + button now opens the editor; tap Create to save.
+    await tester.tap(find.text(AppContent.editorCreate));
+    await tester.pumpAndSettle();
+
     // Creating a habit now offers a reminder for it.
     expect(find.text('Remind you?'), findsOneWidget);
     await tester.tap(find.text('Not now'));

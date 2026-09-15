@@ -101,13 +101,15 @@ void main() {
   });
 }
 
-/// Adds the first preset in the library, whatever it happens to be.
+/// Adds the first preset in the library via the editor sheet.
 Future<void> _addFirstPreset(WidgetTester tester) async {
   final add = find.descendant(
     of: find.byType(ListView),
     matching: find.byIcon(Icons.add),
   );
   await tester.tap(add.first);
+  await tester.pumpAndSettle();
+  await tester.tap(find.text(AppContent.editorCreate));
   await tester.pumpAndSettle();
   await letToastPass(tester);
 }

@@ -230,21 +230,26 @@ class _Stage extends StatelessWidget {
       ),
       padding: const EdgeInsets.all(18),
       child: Center(
-        child: FittedBox(
-          fit: BoxFit.scaleDown,
-          child: AnimatedSwitcher(
-            duration: reduceMotion(context)
-                ? Duration.zero
-                : const Duration(milliseconds: 260),
-            switchInCurve: Curves.easeOutCubic,
-            transitionBuilder: (child, animation) => FadeTransition(
-              opacity: animation,
-              child: ScaleTransition(
-                scale: Tween(begin: 0.94, end: 1.0).animate(animation),
-                child: child,
+        child: MediaQuery(
+          data: MediaQuery.of(context).copyWith(
+            textScaler: TextScaler.noScaling,
+          ),
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: AnimatedSwitcher(
+              duration: reduceMotion(context)
+                  ? Duration.zero
+                  : const Duration(milliseconds: 260),
+              switchInCurve: Curves.easeOutCubic,
+              transitionBuilder: (child, animation) => FadeTransition(
+                opacity: animation,
+                child: ScaleTransition(
+                  scale: Tween(begin: 0.94, end: 1.0).animate(animation),
+                  child: child,
+                ),
               ),
+              child: KeyedSubtree(key: ValueKey(kind), child: preview),
             ),
-            child: KeyedSubtree(key: ValueKey(kind), child: preview),
           ),
         ),
       ),

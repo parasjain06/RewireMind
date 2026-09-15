@@ -79,6 +79,7 @@ class AppIcons {
     'test_app': Icons.science_outlined,
     'journal_menu': Icons.auto_stories_outlined,
     'premium': Icons.workspace_premium_rounded,
+    'sign_out': Icons.logout_rounded,
   };
 
   static IconData forKey(String key) =>

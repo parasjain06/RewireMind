@@ -112,7 +112,7 @@ void main() {
       expect(find.text('Sleep'), findsOneWidget);
     });
 
-    testWidgets('quick-add creates the habit with the preset goal', (
+    testWidgets('adding via + creates the habit with the preset goal', (
       tester,
     ) async {
       final state = await pumpSeededApp(tester);
@@ -126,13 +126,15 @@ void main() {
         find.descendant(of: row.first, matching: find.byIcon(Icons.add)),
       );
       await tester.pumpAndSettle();
+      await tester.tap(find.text(AppContent.editorCreate));
+      await tester.pumpAndSettle();
+      await letToastPass(tester);
 
       final added = state.habits.firstWhere((h) => h.name == 'Sleep');
       expect(added.target, 8);
       expect(added.unit, 'hours');
       expect(added.iconKey, 'sleep');
       expect(state.habits.length, 7);
-      await letToastPass(tester);
     });
 
     testWidgets('an already-added preset shows as Added and cannot re-add', (
@@ -149,10 +151,12 @@ void main() {
         find.descendant(of: row.first, matching: find.byIcon(Icons.add)),
       );
       await tester.pumpAndSettle();
+      await tester.tap(find.text(AppContent.editorCreate));
+      await tester.pumpAndSettle();
+      await letToastPass(tester);
 
       expect(find.text(HabitLibrary.added), findsWidgets);
       expect(state.habits.where((h) => h.name == 'Sleep').length, 1);
-      await letToastPass(tester);
     });
 
     testWidgets('switching category swaps the list', (tester) async {

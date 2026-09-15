@@ -1349,16 +1349,24 @@ class _WeekStrip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final state = context.watch<AppState>();
     final start = startOfWeek(selected);
+    final earliest = state.firstTrackedDay;
+
+    final days = <DateTime>[
+      for (var i = 0; i < 7; i++)
+        if (!start.add(Duration(days: i)).isBefore(earliest))
+          start.add(Duration(days: i)),
+    ];
 
     return Row(
       children: [
-        for (var i = 0; i < 7; i++)
+        for (var i = 0; i < days.length; i++)
           Expanded(
             child: Padding(
-              padding: EdgeInsets.only(right: i == 6 ? 0 : 5),
+              padding: EdgeInsets.only(right: i == days.length - 1 ? 0 : 5),
               child: _WeekDayCell(
-                day: start.add(Duration(days: i)),
+                day: days[i],
                 selected: selected,
                 onTap: onSelect,
               ),

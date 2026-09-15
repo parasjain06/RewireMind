@@ -89,7 +89,9 @@ void main() {
     final other = state.today.subtract(const Duration(days: 1));
     if (other.isBefore(startOfWeek(state.today))) return;
 
-    await tester.tap(find.text('${other.day}').first);
+    // The last one: the streak above the strip is a number too, and on a day
+    // whose date happens to match it, .first taps that instead of the day.
+    await tester.tap(find.text('${other.day}').last);
     await tester.pumpAndSettle();
 
     expect(

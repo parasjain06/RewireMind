@@ -9,8 +9,8 @@ already rounded comes out as a rounded tile inside a rounded tile; and
 Android's adaptive icon wants the artwork and the background as two separate
 layers so the launcher can mask and move them independently.
 
-So the mascot is lifted off its tile and set on a clean square of the app's
-night navy, and everything is cut from that:
+So the mascot is lifted off its tile and set on a clean black square, and
+everything is cut from that:
 
   store/app_store_icon_1024.png     App Store listing and Xcode, 1024, no alpha
   store/play_store_icon_512.png     Play Console listing, 512
@@ -41,11 +41,13 @@ RES = os.path.join(ROOT, 'android', 'app', 'src', 'main', 'res')
 IOS = os.path.join(ROOT, 'ios', 'Runner', 'Assets.xcassets', 'AppIcon.appiconset')
 STORE = os.path.join(ROOT, 'store')
 
-# The navy of the app's night sky, a little lighter at the top. Close to the
-# black the mascot was drawn on, so it sits the same, but tied to the app
-# through the night theme.
-TOP = (36, 60, 90)
-BOTTOM = (13, 24, 40)
+# Black, which is what the mascot was drawn on. It was briefly the navy of the
+# app's night sky — a tie to the theme — but the pink of the brain and the red
+# of the calendar are warm colours, and they carry further off black than off
+# anything else. Flat rather than a gradient: at 48 pixels a gradient is a
+# smudge, and an icon is 48 pixels more often than it is 1024.
+TOP = (0, 0, 0)
+BOTTOM = (0, 0, 0)
 
 # How much of the square the artwork fills. The stores' own masks only take
 # the corners, so the icon can run close to the edge.
@@ -58,7 +60,9 @@ ADAPTIVE_RADIUS = 35.5 / 108
 
 
 def gradient(size):
-    """The background: TOP to BOTTOM, top to bottom."""
+    """The background: TOP to BOTTOM, top to bottom. Both black at the moment,
+    which makes it a flat fill — the ramp stays for the day somebody wants a
+    coloured one back."""
     img = Image.new('RGB', (1, size))
     for y in range(size):
         t = y / max(1, size - 1)
@@ -94,7 +98,7 @@ def lift_artwork(src):
     drawing = np.isin(lab, keep)
 
     # A pixel of feather, and the edge un-mixed from the black it was drawn
-    # over, so no dark fringe comes along onto the navy.
+    # over, so no dark fringe comes along onto the background.
     alpha = ndimage.gaussian_filter(drawing.astype(float), 0.7)
     alpha = np.clip((alpha - 0.05) / 0.9, 0, 1)
     rgb = im.astype(float)
@@ -127,7 +131,7 @@ def enlarge(art, size):
 
 
 def compose(art, size, fill):
-    """The artwork centred on the navy square, filling [fill] of it."""
+    """The artwork centred on the square, filling [fill] of it."""
     canvas = gradient(size).convert('RGBA')
     inner = round(size * fill)
     piece = enlarge(art, inner)
